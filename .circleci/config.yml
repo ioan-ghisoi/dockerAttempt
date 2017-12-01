@@ -3,7 +3,7 @@ jobs:
   build:
     docker:
       - image: golang:1.6.4   # (1)
-    working_directory: /go/src/github.com/CircleCI-Public/circleci-demo-docker
+    working_directory: /dockerAttempt
     steps:
       - checkout
       # ... steps for building/testing app ...
