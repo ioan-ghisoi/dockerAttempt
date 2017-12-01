@@ -26,5 +26,4 @@ jobs:
 
       # build and push Docker image
       - run: |
-          docker load < test.tar.gz
           docker run -p 8080:80 johnnyshrewd/test:latest /usr/sbin/apache2ctl -D FOREGROUND
