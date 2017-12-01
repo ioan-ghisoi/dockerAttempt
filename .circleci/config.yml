@@ -26,7 +26,7 @@ jobs:
 
       # build and push Docker image
       - run: |
-          docker run --d -p 8080:80 johnnyshrewd/test:latest /usr/sbin/apache2ctl -D FOREGROUND
+          docker run -d -p 8080:80 johnnyshrewd/test:latest /usr/sbin/apache2ctl -D FOREGROUND
       - run: |
           pwd
           ls /var/www/html
