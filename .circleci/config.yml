@@ -3,6 +3,7 @@ jobs:
   build:
     docker:
       - image: eboraas/apache
+      - image: circleci/php:7.1-node-browsers
     working_directory: /dockerAttempt
     steps:
       - checkout
