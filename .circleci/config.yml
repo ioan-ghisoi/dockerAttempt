@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: eboraas/apache
+      - image: johnnyshrewd/test
     working_directory: /dockerAttempt
     steps:
       - checkout
@@ -26,4 +26,5 @@ jobs:
 
       # build and push Docker image
       - run: |
-          docker run -p 80:80 -p 443:443 -v ~/dockerAttempt/:/var/www/html/ -d eboraas/apache
+          docker load < test.tar.gz
+          docker run -p 8080:80 johnnyshrewd/test:latest /usr/sbin/apache2ctl -D FOREGROUND
