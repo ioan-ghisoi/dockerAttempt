@@ -1,36 +1,53 @@
 version: 2
 jobs:
   build:
+    working_directory: /app
     docker:
-      - image: alexcheng/magento2
-    working_directory: /dockerAttempt
+      - image: docker:17.05.0-ce-git
     steps:
       - checkout
-      # ... steps for building/testing app ...
-
-      - setup_remote_docker:   # (2)
-          docker_layer_caching: true # (3)
-
-      # use a primary image that already has Docker (recommended)
-      # or install it during a build like we do here
+      - setup_remote_docker
       - run:
-          name: Install Docker client
+          name: Install dependencies
           command: |
-            set -x
-            VER="17.03.0-ce"
-            apt-get -qq update
-            apt-get -qq -y install curl
-            curl -L -o /tmp/docker-$VER.tgz https://get.docker.com/builds/Linux/x86_64/docker-$VER.tgz
-            tar -xz -C /tmp -f /tmp/docker-$VER.tgz
-            mv /tmp/docker/* /usr/bin
+            apk add --no-cache \
+              py-pip=9.0.0-r1
+            pip install \
+              docker-compose==1.12.0 \
+              awscli==1.11.76
+      - restore_cache:
+          keys:
+            - v1-{{ .Branch }}
+          paths:
+            - /caches/app.tar
       - run:
-          name: Install Docker compose
+          name: Load Docker image layer cache
           command: |
-            set -x
-              curl -L https://github.com/docker/compose/releases/download/1.11.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
-              chmod +x /usr/local/bin/docker-compose
-      - run: |
-          docker-compose up -d
-      - run: |
-          pwd
-          ls /var/www/html
+            set +o pipefail
+            docker load -i /caches/app.tar | true
+      - run:
+          name: Build application Docker image
+          command: |
+            docker build --cache-from=app -t app .
+      - run:
+          name: Save Docker image layer cache
+          command: |
+            mkdir -p /caches
+            docker save -o /caches/app.tar app
+      - save_cache:
+          key: v1-{{ .Branch }}-{{ epoch }}
+          paths:
+            - /caches/app.tar
+      - run:
+          name: Run tests
+          command: |
+            docker-compose -f ./docker-compose.test.yml up
+      - deploy:
+          name: Push application Docker image
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              login="$(aws ecr get-login)"
+              ${login}
+              docker tag app "${ECR_ENDPOINT}/app:${CIRCLE_SHA1}"
+              docker push "${ECR_ENDPOINT}/app:${CIRCLE_SHA1}"
+            fi
