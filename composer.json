@@ -1,0 +1,10 @@
+{
+    "name": "ioanghisoi/docker-attempt",
+    "authors": [
+        {
+            "name": "Ioan Ghisoi",
+            "email": "ionutghisoi95@gmail.com"
+        }
+    ],
+    "require": {}
+}
