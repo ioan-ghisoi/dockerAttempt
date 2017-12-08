@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: docker pull circleci/php:7.0.26-cli-jessie-node-browsers
+      - image: circleci/php:7.0.26-cli-jessie-node-browsers
     working_directory: /dockerAttempt
     steps:
       - checkout
