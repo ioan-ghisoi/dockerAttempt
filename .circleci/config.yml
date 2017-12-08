@@ -1,75 +1,53 @@
-## Customize the test machine
-machine:
+version: 2
+jobs:
+  build:
+    working_directory: ~/mern-starter
+    # The primary container is an instance of the first list image listed. Your build commands run in this container.
+    docker:
+      - image: circleci/node:4.8.2
+    # The secondary container is an instance of the second listed image which is run in a common network where ports exposed on the primary container are available on localhost.
+      - image: mongo:3.4.4
+    steps:
+      - checkout
+      - run:
+          name: Update npm
+          command: 'sudo npm install -g npm@latest'
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: Install npm wee
+          command: npm install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+  test:
+    docker:
+      - image: circleci/node:4.8.2
+      - image: mongo:3.4.4
+    steps:
+      - checkout
+      - run:
+          name: Test
+          command: npm test
+      - run:
+          name: Generate code coverage
+          command: './node_modules/.bin/nyc report --reporter=text-lcov'
+      - store_artifacts:
+          path: test-results.xml
+          prefix: tests
+      - store_artifacts:
+          path: coverage
+          prefix: coverage
 
-  timezone:
-    America/Los_Angeles # Set the timezone
-
-  # Version of ruby to use
-  ruby:
-    version:
-      1.8.7-p358-falcon-perf
-
-  # Override /etc/hosts
-  hosts:
-    circlehost: 127.0.0.1
-    dev.mycompany.com: 127.0.0.1
-
-  # Add some environment variables
-  environment:
-    CIRCLE_ENV: test
-    DATABASE_URL: postgresql://ubuntu:@127.0.0.1:5432/circle_test
-
-## Customize checkout
-checkout:
-  post:
-    - git submodule sync
-    - git submodule update --init # use submodules
-
-## Customize dependencies
-dependencies:
-  pre:
-    - npm install coffeescript # install from a different package manager
-    - gem uninstall bundler # use a custom version of bundler
-    - gem install bundler --pre
-
-  override:
-    - bundle install: # note ':' here
-        timeout: 180 # fail if command has no output for 3 minutes
-        # IMPORTANT NOTE: ^^ the timeout modifier above must be
-        # double indented (four spaces) from the previous line
-  
-  # we automatically cache and restore many dependencies between
-  # builds. If you need to, you can add custom paths to cache:
-  cache_directories:
-    - "custom_1"   # relative to the build directory
-    - "~/custom_2" # relative to the user's home directory
-
-## Customize database setup
-database:
-  override:
-    # replace CircleCI's generated database.yml
-    - cp config/database.yml.ci config/database.yml
-    - bundle exec rake db:create db:schema:load
-
-## Customize test commands
-test:
-  override:
-    - phpunit test/unit-tests # use PHPunit for testing
-  post:
-    - bundle exec rake jasmine:ci: # add an extra test type
-        environment:
-          RAILS_ENV: test
-          RACK_ENV: test
-
-## Customize deployment commands
-deployment:
-  staging:
-    branch: master
-    heroku:
-      appname: foo-bar-123
-
-## Custom notifications
-notify:
-  webhooks:
-    # A list of hashes representing hooks. Only the url field is supported.
-    - url: https://someurl.com/hooks/circle
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
