@@ -18,7 +18,8 @@ jobs:
           key: composer-v1-{{ checksum "composer.json" }}
           paths:
             - vendor
-      - run: sudo apt-get install libpng-dev
+      - run: sudo apt-get install libpng-dev -y
+      - run: sudo apt-get install -y libicu-dev
       - run: sudo docker-php-ext-install gd
       - run: sudo docker-php-ext-install curl
       - run: sudo docker-php-ext-install intl
