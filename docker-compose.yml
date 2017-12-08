@@ -1,7 +1,7 @@
 version: "2"
 services:
   varnish:
-    image: meanbee/magento2-varnish:latest
+    image: 7.0.26-zts-node-browsers
     environment:
       - VIRTUAL_HOST=magento2.docker
       - VIRTUAL_PORT=80
@@ -75,7 +75,7 @@ services:
       - M2SETUP_BACKEND_FRONTNAME=admin
       - M2SETUP_ADMIN_FIRSTNAME=Admin
       - M2SETUP_ADMIN_LASTNAME=User
-      - M2SETUP_ADMIN_EMAIL=dummy@gmail.com
+      - M2SETUP_ADMIN_EMAIL=dummy@gmail.cssh -p 64537 34.227.109.40om
       - M2SETUP_ADMIN_USER=admin
       - M2SETUP_ADMIN_PASSWORD=password1
       - M2SETUP_VERSION=2.1.*
