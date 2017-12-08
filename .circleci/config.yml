@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: 7.0.26-cli-jessie-node-browsers
+      - image: 7.0.26-jessie-node-browsers
     working_directory: /dockerAttempt
     steps:
       - checkout
