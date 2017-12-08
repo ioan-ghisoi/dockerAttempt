@@ -1,7 +1,7 @@
 version: "2"
 services:
   varnish:
-    image: 7.0.26-zts-node-browsers
+    image: 7.0.26-cli-jessie-node-browsers
     environment:
       - VIRTUAL_HOST=magento2.docker
       - VIRTUAL_PORT=80
