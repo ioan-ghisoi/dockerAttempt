@@ -26,7 +26,7 @@ jobs:
 
       # build and push Docker image
       - run: |
-          docker run -d -p 8080:80 magento/magento2devbox-web:latest /usr/sbin/apache2ctl -D FOREGROUND
+          docker-compose up -d
       - run: |
           pwd
           ls /var/www/html
