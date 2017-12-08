@@ -18,5 +18,11 @@ jobs:
           key: composer-v1-{{ checksum "composer.json" }}
           paths:
             - vendor
-      - run: ./vendor/bin/phpcs --standard=psr2 --ignore=*.js,*.css -np ./src
-      - run: ./vendor/bin/phpunit ./tests/
+      - run: sudo docker-php-ext-install gd
+      - run: sudo docker-php-ext-install curl
+      - run: sudo docker-php-ext-install intl
+      - run: sudo docker-php-ext-install zip
+      - run: sudo docker-php-ext-install mbstring
+      - run: sudo docker-php-ext-install mcrypt
+      - run: sudo docker-php-ext-install mysql
+      - run: sudo docker-php-ext-install xml
