@@ -21,7 +21,6 @@ jobs:
       - run: sudo apt-get install libpng-dev -y
       - run: sudo apt-get install -y libicu-dev
       - run: sudo docker-php-ext-install gd
-      - run: sudo docker-php-ext-install curl
       - run: sudo docker-php-ext-install intl
       - run: sudo docker-php-ext-install zip
       - run: sudo docker-php-ext-install mbstring
