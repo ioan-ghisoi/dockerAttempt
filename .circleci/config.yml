@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: magento/magento2devbox-web
+      - image: alexcheng/magento2
     working_directory: /dockerAttempt
     steps:
       - checkout
