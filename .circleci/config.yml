@@ -41,4 +41,7 @@ jobs:
           name: Run image as constainer
           command: |
             docker-compose exec web sh
+      - run:
+          name: Run image as constainer
+          command: |
             install-sampledata

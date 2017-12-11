@@ -5,7 +5,7 @@ services:
     volumes:
       - ~/johnny/magento2:/var/www/html
     ports:
-      - "81:80"
+      - "85:80"
     links:
       - db
     env_file:
@@ -19,7 +19,7 @@ services:
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     ports:
-      - "8580:80"
+      - "8585:80"
     links:
       - db     
 volumes:
