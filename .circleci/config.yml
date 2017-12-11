@@ -5,25 +5,18 @@ jobs:
   build:
     docker:
       - image: circleci/php:7.0.26-apache-node-browsers
-    working_directory: ~/circleci-php
+    working_directory: ~/dockerAttempt
     steps:
       - checkout
-      - run: curl -o composer.phar https://getcomposer.org/composer.phar
-      - restore_cache:
-          keys:
-            - composer-v1-{{ checksum "composer.json" }}
-            - composer-v1-
-      - run: php composer.phar install --no-interaction --optimize-autoloader
-      - save_cache:
-          key: composer-v1-{{ checksum "composer.json" }}
-          paths:
-            - vendor
-      - run: sudo apt-get install libpng-dev -y
-      - run: sudo apt-get install -y libicu-dev
-      - run: sudo docker-php-ext-install gd
-      - run: sudo docker-php-ext-install intl
-      - run: sudo docker-php-ext-install zip
-      - run: sudo docker-php-ext-install mbstring
-      - run: sudo docker-php-ext-install mcrypt
-      - run: sudo docker-php-ext-install mysql
-      - run: sudo docker-php-ext-install xml
+      - run:
+        name: Install Docker Compose
+        command: |
+          set -x
+          curl -L https://github.com/docker/compose/releases/download/1.11.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+          chmod +x /usr/local/bin/docker-compose
+      - run:
+        name: Running
+        command: |
+          cd ~/dockerAttempt
+          docker-compose build
+          docker-compose up -d
