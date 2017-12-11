@@ -29,3 +29,5 @@ jobs:
             cd ~/johnny
             docker-compose build
             docker-compose up -d
+            /usr/local/bin/install-magento
+            /usr/local/bin/install-sampledata
