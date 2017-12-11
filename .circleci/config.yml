@@ -33,8 +33,12 @@ jobs:
             docker-compose up -d
 
       - run:
-          name: Running
+          name: Run image as constainer
           command: |
-            cd ~/johnny
-            docker-compose build
-            docker-compose up -d
+            docker run -i -t alexcheng/magento2 /bin/bash
+
+      - run:
+          name: Run image as constainer
+          command: |
+            docker run -i -t alexcheng/magento2 /bin/bash
+            install-sampledata
