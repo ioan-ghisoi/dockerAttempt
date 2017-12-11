@@ -27,7 +27,7 @@ jobs:
           name: Set up containers
           command: |
             docker-compose down
-            docker-compose up --force-recreate
+            docker-compose up -d --force-recreate
       - run:
           name: Install Magetno
           command: |
