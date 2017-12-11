@@ -2,6 +2,8 @@ version: '3.0'
 services:
   web:
     image: alexcheng/magento2
+    volumes:
+      - ~/johnny/magento2:/var/www/html
     ports:
       - "81:80"
     links:
