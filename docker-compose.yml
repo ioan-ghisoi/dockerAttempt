@@ -1,11 +1,9 @@
 version: '3.0'
 services:
   web:
-    image: alexcheng/magento2
-    # volumes:
-    #   - ~/johnny/magento2:/var/www/html
+    build: .
     ports:
-      - "85:80"
+      - "81:80"
     links:
       - db
     env_file:
@@ -18,8 +16,9 @@ services:
       - env
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
     ports:
-      - "8585:80"
+      - "8580:80"
     links:
       - db     
 volumes:
