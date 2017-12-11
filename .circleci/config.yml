@@ -32,9 +32,9 @@ jobs:
           name: Install Magetno
           command: |
             /bin/sleep 3  # Make sure the container is up
-            docker exec -it johnnyshrewd install-magento
+            docker exec -it magento install-magento
 
       - run:
           name: Deploy Sample Data
           command: |
-            docker exec -it johnnyshrewd install-sampledata
+            docker exec -it magento install-sampledata

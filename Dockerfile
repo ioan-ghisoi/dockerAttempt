@@ -1,10 +1,8 @@
 FROM alexcheng/apache2-php7:7.1.11
 
-MAINTAINER Fu Cheng <alexcheng1982@gmail.com>
-
 RUN a2enmod rewrite
 
-ENV MAGENTO_VERSION 2.2.1
+ENV MAGENTO_VERSION 2.0.17
 
 RUN rm -rf /var/www/html/* \
     && apt-get update \
@@ -49,14 +47,14 @@ RUN chmod +x /usr/local/bin/install-magento
 COPY ./bin/install-sampledata /usr/local/bin/install-sampledata
 RUN chmod +x /usr/local/bin/install-sampledata
 
+COPY ./bin/install-checkout /usr/local/bin/install-checkout
+RUN chmod +x /usr/local/bin/install-checkout
+
 RUN echo "memory_limit=1024M" > /usr/local/etc/php/conf.d/memory-limit.ini
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-#Commented out the next 3 lines, because i don't see no use of this
 WORKDIR /var/www/html
-#VOLUME /var/www/html/var
-#VOLUME /var/www/html/pub
 
 # Add cron job
 ADD crontab /etc/cron.d/magento2-cron

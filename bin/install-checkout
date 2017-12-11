@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+su www-data <<EOSU
+
+cd /var/www/html/bin/magento && composer require checkoutcom/magento2:*
+
+/var/www/html/bin/magento setup:upgrade
+
+/var/www/html/bin/magento setup:di:compile
+
+EOSU
