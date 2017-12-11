@@ -6,6 +6,8 @@ echo This is a test
 
 ln -s ~/.composer/auth.json /var/www/html/var/composer_home/
 
+cd /var/www/html/bin/magento && composer require checkoutcom/magento2:*
+
 /var/www/html/bin/magento sampledata:deploy
 
 /var/www/html/bin/magento setup:upgrade
