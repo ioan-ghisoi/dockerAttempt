@@ -4,44 +4,43 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:8-stretch-browsers
+      - image: docker:17.05.0-ce-git
     working_directory: ~/johnny
     steps:
       - checkout
-      - setup_remote_docker:   # (2)
-          docker_layer_caching: true # (3)
+      - setup_remote_docker
       - run:
-          name: Install Docker client
+          name: Install dependencies
           command: |
-            sudo chown -R $(whoami) /usr
-            set -x
-            VER="17.03.0-ce"
-            curl -L -o /tmp/docker-$VER.tgz https://get.docker.com/builds/Linux/x86_64/docker-$VER.tgz
-            tar -xz -C /tmp -f /tmp/docker-$VER.tgz
-            mv /tmp/docker/* /usr/bin
+            apk add --no-cache \
+              py-pip=9.0.0-r1
+            pip install \
+              docker-compose==1.12.0 \
+              awscli==1.11.76
+      - restore_cache:
+          keys:
+            - v1-{{ .Branch }}
+          paths:
+            - /caches/app.tar
       - run:
-          name: Install Docker Compose
+          name: Load Docker image layer cache
           command: |
-            set -x
-            curl -L https://github.com/docker/compose/releases/download/1.11.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
-            chmod +x /usr/local/bin/docker-compose
+            set +o pipefail
+            docker load -i /caches/app.tar | true
       - run:
-          name: Running
+          name: Build application Docker image
           command: |
-            cd ~/johnny
-            docker-compose build
-            docker-compose up -d
-
+            docker build --cache-from=app -t app .
       - run:
-          name: Run image as constainer
+          name: Save Docker image layer cache
           command: |
-            docker run -i -t alexcheng/magento2 /bin/bash
-
+            mkdir -p /caches
+            docker save -o /caches/app.tar app
+      - save_cache:
+          key: v1-{{ .Branch }}-{{ epoch }}
+          paths:
+            - /caches/app.tar
       - run:
-          name: Run image as constainer
+          name: Run tests
           command: |
-            docker-compose exec web sh
-      - run:
-          name: Run image as constainer
-          command: |
-            install-sampledata
+            docker-compose -f ./docker-compose.test.yml up
