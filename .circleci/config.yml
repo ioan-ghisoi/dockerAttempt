@@ -43,4 +43,4 @@ jobs:
       - run:
           name: Run tests
           command: |
-            cd ~/johnny && docker-compose -f docker-compose.test.yml up
+            cd ~/johnny && docker-compose -f docker-compose-dev.yml up
