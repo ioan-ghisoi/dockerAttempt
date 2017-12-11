@@ -38,3 +38,8 @@ jobs:
           name: Deploy Sample Data
           command: |
             docker exec -it magento install-sampledata
+
+      - run:
+          name: Deploy Sample Data
+          command: |
+            docker exec -it magento install-checkout
