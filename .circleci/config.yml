@@ -28,3 +28,5 @@ jobs:
           command: |
             docker-compose build
             docker-compose up -d
+            docker exec -it johnnyshrewd install-magento
+            docker exec -it johnnyshrewd install-sampledata
