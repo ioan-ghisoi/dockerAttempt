@@ -9,38 +9,36 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
+      - setup_remote_docker:   # (2)
+          docker_layer_caching: true # (3)
       - run:
-          name: Install dependencies
+          name: Install Docker client
           command: |
-            apk add --no-cache \
-              py-pip=9.0.0-r1
-            pip install \
-              docker-compose==1.12.0 \
-              awscli==1.11.76
-      - restore_cache:
-          keys:
-            - v1-{{ .Branch }}
-          paths:
-            - /caches/app.tar
+            sudo chown -R $(whoami) /usr
+            set -x
+            VER="17.03.0-ce"
+            curl -L -o /tmp/docker-$VER.tgz https://get.docker.com/builds/Linux/x86_64/docker-$VER.tgz
+            tar -xz -C /tmp -f /tmp/docker-$VER.tgz
+            mv /tmp/docker/* /usr/bin
       - run:
-          name: Load Docker image layer cache
+          name: Install Docker Compose
           command: |
-            set +o pipefail
-            docker load -i /caches/app.tar | true
+            set -x
+            curl -L https://github.com/docker/compose/releases/download/1.11.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+            chmod +x /usr/local/bin/docker-compose
       - run:
-          name: Build application Docker image
+          name: Running
           command: |
-            docker build --cache-from=app -t app .
+            cd ~/johnny
+            docker-compose build
+            docker-compose up -d
+
       - run:
-          name: Save Docker image layer cache
+          name: Run image as constainer
           command: |
-            mkdir -p /caches
-            docker save -o /caches/app.tar app
-      - save_cache:
-          key: v1-{{ .Branch }}-{{ epoch }}
-          paths:
-            - /caches/app.tar
+            docker run -i -t alexcheng/magento2 /bin/bash
+
       - run:
-          name: Run tests
+          name: Run image as constainer
           command: |
-            cd ~/johnny && docker-compose -f docker-compose-dev.yml up
+            docker exsec 
