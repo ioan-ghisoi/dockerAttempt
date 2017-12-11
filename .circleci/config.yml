@@ -34,7 +34,12 @@ jobs:
             /bin/sleep 5  # Make sure the container is up
             docker exec -it magento install-magento
 
+      # - run:
+      #     name: Deploy Sample Data
+      #     command: |
+      #       docker exec -it magento install-sampledata
+
       - run:
-          name: Deploy Sample Data and Checkout Plugin
+          name: Deploy Sample Data
           command: |
-            docker exec -it magento install-sampledata
+            docker exec -it magento install-checkout

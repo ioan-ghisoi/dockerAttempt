@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+su www-data <<EOSU
+
+echo This is a test
+
+cd /var/www/html && composer require checkoutcom/magento2:*
+
+
+EOSU
