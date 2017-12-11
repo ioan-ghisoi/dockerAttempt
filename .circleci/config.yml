@@ -3,7 +3,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: alexcheng/magento2
+      - image: docker:17.05.0-ce-git
     working_directory: ~/johnny
     steps:
       - checkout
@@ -12,6 +12,7 @@ jobs:
       - run:
           name: Install Docker client
           command: |
+            chown -R $(whoami) /usr
             set -x
             VER="17.03.0-ce"
             curl -L -o /tmp/docker-$VER.tgz https://get.docker.com/builds/Linux/x86_64/docker-$VER.tgz
@@ -24,10 +25,20 @@ jobs:
             curl -L https://github.com/docker/compose/releases/download/1.11.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
             chmod +x /usr/local/bin/docker-compose
       - run:
-          name: Run Build
+          name: Running
           command: |
             cd ~/johnny
             docker-compose build
             docker-compose up -d
-            /usr/local/bin/install-magento
-            /usr/local/bin/install-sampledata
+
+      - run:
+          name: Run image as constainer
+          command: |
+            docker run -i -t alexcheng/magento2 /bin/bash
+
+      - run:
+          name: Run image as constainer
+          command: |
+            cd ~/johnny
+            docker-compose build
+            docker-compose up -d
