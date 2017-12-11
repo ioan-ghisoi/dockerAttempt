@@ -35,11 +35,6 @@ jobs:
             docker exec -it magento install-magento
 
       - run:
-          name: Deploy Sample Data
+          name: Deploy Sample Data and Checkout Plugin
           command: |
             docker exec -it magento install-sampledata
-
-      - run:
-          name: Install Checkout
-          command: |
-            docker exec -it magento install-checkout
