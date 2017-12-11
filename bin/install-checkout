@@ -2,9 +2,8 @@
 
 su www-data <<EOSU
 
-echo This is a test
-
 cd /var/www/html && composer require checkoutcom/magento2:*
 
+/var/www/html/bin/magento setup:di:compile
 
 EOSU

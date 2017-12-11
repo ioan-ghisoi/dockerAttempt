@@ -2,13 +2,10 @@
 
 su www-data <<EOSU
 
-echo This is a test
-
 ln -s ~/.composer/auth.json /var/www/html/var/composer_home/
 
 /var/www/html/bin/magento sampledata:deploy
 
 /var/www/html/bin/magento setup:upgrade
-
 
 EOSU
