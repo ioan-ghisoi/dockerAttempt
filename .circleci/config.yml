@@ -28,5 +28,12 @@ jobs:
           command: |
             docker-compose build
             docker-compose up -d
+      - run:
+          name: Install Magetno
+          command: |
             docker exec -it johnnyshrewd install-magento
+
+      - run:
+          name: Deploy Sample Data
+          command: |
             docker exec -it johnnyshrewd install-sampledata
