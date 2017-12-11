@@ -40,5 +40,5 @@ jobs:
       - run:
           name: Run image as constainer
           command: |
-            docker run -i -t alexcheng/magento2 /bin/bash
+            docker-compose exec web sh
             install-sampledata
