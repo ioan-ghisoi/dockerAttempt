@@ -10,10 +10,12 @@ jobs:
       - setup_remote_docker:   # (2)
           docker_layer_caching: true # (3)
       - run:
-          name: Install Docker client
+          name: Refresh Magetno
           command: |
-            set -x
-            VER="17.03.0-ce"
-            curl -L -o /tmp/docker-$VER.tgz https://get.docker.com/builds/Linux/x86_64/docker-$VER.tgz
-            tar -xz -C /tmp -f /tmp/docker-$VER.tgz
-            mv /tmp/docker/* /usr/bin
+            a2enmod rewrite
+            service apache2 restart
+            service mysql restart
+            /var/www/html/bin/magento setup:upgrade
+            /var/www/html/bin/magento setup:di:compile
+            /var/www/html/bin/magento setup:static-content:deploy
+            chmod -R 777 /var/www/html
