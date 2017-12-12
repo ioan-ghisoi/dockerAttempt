@@ -11,6 +11,6 @@ jobs:
           name: Refresh Magetno
           command: |
             a2enmod rewrite && service apache2 restart && service mysql restart
-            cd /var/www/html && bin/magento setup:upgrade && bin/magento setup:di:compile && bin/magento && setup:static-content:deploy
+            cd /var/www/html && bin/magento setup:upgrade && bin/magento setup:di:compile && bin/magento setup:static-content:deploy
             #Make sure the permissions are ok
             find . -type d -exec chmod 755 {} \; && find . -type f -exec chmod 644 {} \; && chmod u+x bin/magento
