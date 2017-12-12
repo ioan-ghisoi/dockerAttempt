@@ -38,7 +38,7 @@ RUN cd /var/www/html \
     && chmod u+x bin/magento
 
 
-RUN su www-data -c "cd /var/www/html && composer config repositories.magento composer https://repo.magento.com/"
+RUN su www-data -c "cd /var/www/html && php composer config -a http-basic.repo.magento.com e3fe1cabf752165bd79fbbbcb0e626fd 11543462ae0104c9792bd3d79b57663a && composer config repositories.magento composer https://repo.magento.com/"
 
 
 COPY ./bin/install-magento /usr/local/bin/install-magento
