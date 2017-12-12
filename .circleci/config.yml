@@ -18,4 +18,4 @@ jobs:
             /var/www/html/bin/magento setup:upgrade
             /var/www/html/bin/magento setup:di:compile
             /var/www/html/bin/magento setup:static-content:deploy
-            chmod -R 777 /var/www/html
+            cd /var/www/html && find . -type d -exec chmod 755 {} \; && find . -type f -exec chmod 644 {} \; && chmod u+x bin/magento
