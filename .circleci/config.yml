@@ -7,15 +7,10 @@ jobs:
     working_directory: ~/johnny
     steps:
       - checkout
-      - setup_remote_docker:   # (2)
-          docker_layer_caching: true # (3)
       - run:
           name: Refresh Magetno
           command: |
-            a2enmod rewrite
-            service apache2 restart
-            service mysql restart
-            /var/www/html/bin/magento setup:upgrade
-            /var/www/html/bin/magento setup:di:compile
-            /var/www/html/bin/magento setup:static-content:deploy
-            cd /var/www/html && find . -type d -exec chmod 755 {} \; && find . -type f -exec chmod 644 {} \; && chmod u+x bin/magento
+            a2enmod rewrite && service apache2 restart && service mysql restart
+            cd /var/www/html && bin/magento setup:upgrade && bin/magento setup:di:compile && bin/magento && setup:static-content:deploy
+            #Make sure the permissions are ok
+            find . -type d -exec chmod 755 {} \; && find . -type f -exec chmod 644 {} \; && chmod u+x bin/magento
