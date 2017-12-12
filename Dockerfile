@@ -47,9 +47,6 @@ RUN chmod +x /usr/local/bin/install-magento
 COPY ./bin/install-sampledata /usr/local/bin/install-sampledata
 RUN chmod +x /usr/local/bin/install-sampledata
 
-COPY ./bin/install-checkout /usr/local/bin/install-checkout
-RUN chmod +x /usr/local/bin/install-checkout
-
 RUN echo "memory_limit=1024M" > /usr/local/etc/php/conf.d/memory-limit.ini
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

@@ -26,18 +26,18 @@ jobs:
       - run:
           name: Set up containers
           command: |
-            docker-compose down
-            docker-compose up -d --force-recreate
+            docker-compose build
+            docker-compose up -d
       - run:
           name: Install Magetno
           command: |
             /bin/sleep 5  # Make sure the container is up
             docker exec -it magento install-magento
 
-      # - run:
-      #     name: Deploy Sample Data
-      #     command: |
-      #       docker exec -it magento install-sampledata
+      - run:
+          name: Install Checkout
+          command: |
+            docker exec magento /bin/bash -c 'cd /var/www/html && composer require checkoutcom/magento2:*'
 
       - run:
           name: Deploy Sample Data
