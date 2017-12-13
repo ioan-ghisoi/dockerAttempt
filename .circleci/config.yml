@@ -4,13 +4,20 @@ jobs:
   build:
     docker:
       - image: johnnyshrewd/magento
-    working_directory: ~/johnny
+    working_directory: ~/cko_magento2
     steps:
       - checkout
       - run:
-          name: Refresh Magetno
+          name: Refresh Magetno and Install Checkout
           command: |
             sudo a2enmod rewrite && sudo service apache2 restart && sudo service mysql restart
-            # cd /var/www/html && bin/magento setup:upgrade && bin/magento setup:di:compile && bin/magento setup:static-content:deploy
-            # #Make sure the permissions are ok
-            # find . -type d -exec chmod 755 {} \; && find . -type f -exec chmod 644 {} \; && chmod u+x bin/magento
+            cd /var/www/html/magento2/app && sudo mkdir code && cd code && sudo mkdir CheckoutCom && cd CheckoutCom && sudo mkdir Magento2 && sudo cp -R ~/cko_magento2/* Magento2/
+            sudo php /var/www/html/magento2/bin/magento setup:upgrade && sudo php /var/www/html/magento2/bin/magento setup:di:compile
+      - run:
+          name: Install dependencies
+          command: |
+            cd ~/cko_magento2/tests && npm i 
+      - run:
+          name: Run Tests
+          command: |
+            cd ~/cko_magento2/tests && node --max-old-space-size=2000 ./node_modules/.bin/chimp ./config/chimp.js
