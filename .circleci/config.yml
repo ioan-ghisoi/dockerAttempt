@@ -21,3 +21,6 @@ jobs:
           name: Run Tests
           command: |
             node --max-old-space-size=2000 ./node_modules/.bin/chimp ./config/chimp.js
+      - store_artifacts:
+          path: ~/cko_magento2/tests/reports/screenshots
+          destination: Failed-Tests
