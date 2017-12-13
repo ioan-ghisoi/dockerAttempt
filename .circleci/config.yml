@@ -12,7 +12,7 @@ jobs:
           command: |
             sudo a2enmod rewrite && sudo service apache2 restart && sudo service mysql restart
             cd /var/www/html/magento2/app && sudo mkdir code && cd code && sudo mkdir CheckoutCom && cd CheckoutCom && sudo mkdir Magento2 && sudo cp -R ~/cko_magento2/* Magento2/
-            cd /var/www/html/magento2 && sudo php bin/magento setup:upgrade && sudo php bin/magento setup:di:compile && find . -type d -exec sudo chmod 755 {} \; && find . -type f -exec sudo chmod 644 {} \; && sudo chmod u+x bin/magento
+            cd /var/www/html/magento2 && sudo php bin/magento setup:upgrade && sudo php bin/magento setup:di:compile && chmod -R 777 .
       - run:
           name: Install dependencies
           command: |
