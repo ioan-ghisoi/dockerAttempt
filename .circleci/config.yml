@@ -3,14 +3,14 @@ version: 2
 jobs:
   build:
     docker:
-      - image: johnnyshrewd/fun
+      - image: johnnyshrewd/magento
     working_directory: ~/johnny
     steps:
       - checkout
       - run:
           name: Refresh Magetno
           command: |
-            a2enmod rewrite && service apache2 restart && service mysql restart
-            cd /var/www/html && bin/magento setup:upgrade && bin/magento setup:di:compile && bin/magento setup:static-content:deploy
-            #Make sure the permissions are ok
-            find . -type d -exec chmod 755 {} \; && find . -type f -exec chmod 644 {} \; && chmod u+x bin/magento
+            sudo a2enmod rewrite && sudo service apache2 restart && sudo service mysql restart
+            # cd /var/www/html && bin/magento setup:upgrade && bin/magento setup:di:compile && bin/magento setup:static-content:deploy
+            # #Make sure the permissions are ok
+            # find . -type d -exec chmod 755 {} \; && find . -type f -exec chmod 644 {} \; && chmod u+x bin/magento
