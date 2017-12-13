@@ -247,6 +247,7 @@ export default {
       new_product_price: 'div._required:nth-child(1) > div:nth-child(2) > div:nth-child(1) > input:nth-child(1)',
       new_product_quantity: 'fieldset.admin__field:nth-child(7) > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > input:nth-child(1)',
       new_product_stock: 'div.admin__field:nth-child(8) > div:nth-child(2) > select:nth-child(1)',
+      new_product_load_mask: '.admin__form-loading-mask',
     },
   },
 };

@@ -69,8 +69,11 @@ export default function () {
     browser.selectByValue(BACKEND.new_product_stock, VAL.new_product_stock);
     browser.click(BACKEND.test_product_save);
     browser.waitUntil(function () {
-      return !browser.isVisible(BACKEND.admin_loader);
-    }, VAL.timeout_out, 'add product page loader should not be visible');
+      return browser.isVisible(BACKEND.new_product_load_mask);
+    }, VAL.timeout_out, 'the product should be saved');
+    browser.waitUntil(function () {
+      return !browser.isVisible(BACKEND.new_product_load_mask);
+    }, VAL.timeout_out, 'the product should be saved');
   });
   this.Given(/^I go to the backend of Checkout's plugin$/, () => {
     browser.url(URL.magento_base + URL.payments_path);
