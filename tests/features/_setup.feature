@@ -1,12 +1,12 @@
-Feature: Setup Magento
-      Keys, Url's
+Feature: Prepare Magento for Tests
+      Disable SecretKey Encryption, Create a Product, Set Checkout Keys
 
-Scenario: I should be able to disable magento's URL incription and set the plugin keys
+Scenario: I setup Magento for tests
       Given I set the viewport and timeout
       Given I disable the url secret key encryption
-      Given I update the stock for my test item
+      Given I create a product
       Given I go to the backend of Checkout's plugin
       Given I set the sandbox keys
       Given I save the backend settings
       Given I create an account
-      Given I logout from the registered customer account
+      Then I logout from the registered customer account

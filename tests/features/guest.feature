@@ -6,7 +6,6 @@ Scenario: I should be able to complete a 3D transaction using Frames integration
       Given I enable 3D Secure
       Given I set the integration type to frames
       Given I save the backend settings
-      Then I clear magento's cache
       Then I complete the order flow as a unregistered customer until the payment stage
       Then I choose Checkout as a payment option
       Then I complete Checkout Frames with a mastercard card
@@ -19,7 +18,6 @@ Scenario: I should be able to complete a non-3D transaction using Frames integra
       Given I disable 3D Secure
       Given I set the integration type to frames
       Given I save the backend settings
-      Then I clear magento's cache
       Then I complete the order flow as a unregistered customer until the payment stage
       Then I choose Checkout as a payment option
       Then I complete Checkout Frames with a mastercard card
@@ -31,7 +29,6 @@ Scenario: I should be able to complete a 3D transaction using Hosted integration
       Given I enable 3D Secure
       Given I set the integration type to hosted
       Given I save the backend settings
-      Then I clear magento's cache
       Then I complete the order flow as a unregistered customer until the payment stage
       Then I choose Checkout as a payment option
       Then I submit the order for the hosted integration
@@ -44,7 +41,6 @@ Scenario: I should be able to complete a non-3D transaction using Hosted integra
       Given I disable 3D Secure
       Given I set the integration type to hosted
       Given I save the backend settings
-      Then I clear magento's cache
       Then I complete the order flow as a unregistered customer until the payment stage
       Then I choose Checkout as a payment option
       Then I submit the order for the hosted integration

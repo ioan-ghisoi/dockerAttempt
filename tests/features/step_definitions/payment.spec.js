@@ -1,5 +1,5 @@
 /* eslint-disable func-names, prefer-arrow-callback */
-import Globals from '../../globals/globals';
+import Globals from '../../config/globals';
 
 const VAL = Globals.value;
 const FRONTEND = Globals.selector.frontend;
