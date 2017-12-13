@@ -7,14 +7,6 @@ const BACKEND = Globals.selector.backend;
 const FRONTEND = Globals.selector.frontend;
 
 export default function () {
-  this.Given(/^I set the viewport and timeout$/, () => {
-    this.setDefaultTimeout(120 * 1000);
-    browser.setViewportSize({
-      width: VAL.resolution_w,
-      height: VAL.resolution_h,
-    }, true);
-  });
-
   this.Given(/^I disable the url secret key encryption$/, () => {
     browser.url(URL.magento_base + URL.admin_path);
     if (browser.isVisible(BACKEND.admin_username)) {
