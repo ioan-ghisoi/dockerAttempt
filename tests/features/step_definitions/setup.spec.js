@@ -111,6 +111,52 @@ export default function () {
     browser.click(BACKEND.plugin.save);
     browser.pause(5000); //add pause and run
   });
+  this.Given(/^I make sure the settings are (.*) (.*) (.*)$/, (integration, threed, customisation) => {
+    browser.url(URL.magento_base + URL.payments_path);
+    if (browser.isVisible(BACKEND.admin_username)) {
+      browser.setValue(BACKEND.admin_username, VAL.admin.username);
+      browser.setValue(BACKEND.admin_password, VAL.admin.password);
+      browser.click(BACKEND.admin_sign_in);
+      browser.url(URL.magento_base + URL.payments_path); // avoid magento cache popup
+    }
+    if (!browser.isVisible(BACKEND.plugin.selector)) {
+      browser.click(BACKEND.other_payments);
+    }
+    if (!browser.isVisible(BACKEND.plugin.basic_category.selector)) {
+      browser.click(BACKEND.plugin.selector);
+    }
+    if (!browser.isVisible(BACKEND.plugin.basic_category.title)) {
+      browser.click(BACKEND.plugin.basic_category.selector);
+    }
+    if (!browser.isVisible(BACKEND.plugin.advanced_category.cvv_vetification)) {
+      browser.click(BACKEND.plugin.advanced_category.selector);
+    }
+    if (!browser.isVisible(BACKEND.plugin.order_category.order_creation)) {
+      browser.click(BACKEND.plugin.order_category.selector);
+    }
+    if (!browser.isVisible(BACKEND.plugin.keys_category.public)) {
+      browser.click(BACKEND.plugin.keys_category.selector);
+    }
+
+    if(integration == 'frames') {
+      chai.expect(browser.getValue(BACKEND.plugin.basic_category.integration)).to.equal('embedded');
+    } else {
+      chai.expect(browser.getValue(BACKEND.plugin.basic_category.integration)).to.equal('hosted');
+    }
+
+    if(threed == 'threed') {
+      chai.expect(browser.getValue(BACKEND.plugin.advanced_category.three_d)).to.equal('1');
+    } else {
+      chai.expect(browser.getValue(BACKEND.plugin.advanced_category.three_d)).to.equal('0');
+    }
+
+    if(customisation == 'customised') {
+      chai.expect(browser.getValue(BACKEND.plugin.basic_category.integration)).to.equal('hosted');
+      chai.expect(browser.getValue(BACKEND.plugin.basic_category.hosted_button_label)).to.equal(VAL.button_label);
+    }
+
+
+  });
   this.Given(/^I create an account$/, () => {
     browser.url(URL.magento_base + URL.sign_up_path);
     browser.waitUntil(function () {
