@@ -1,4 +1,5 @@
 /* eslint-disable func-names, prefer-arrow-callback */
+import chai from 'chai';
 import Globals from '../../config/globals';
 
 const URL = Globals.value.url;
