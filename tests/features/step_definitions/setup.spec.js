@@ -110,9 +110,11 @@ export default function () {
   });
   this.Given(/^I save the backend settings$/, () => {
     browser.click(BACKEND.plugin.save);
-    browser.pause(5000); //add pause and run
+    browser.waitUntil(function () {
+      return browser.isVisible(BACKEND.save_success_message);
+    }, VAL.timeout_out, 'the changes should be saved');
   });
-  this.Given(/^I make sure the settings are (.*) (.*) (.*)$/, (integration, threed, customisation) => {
+  this.Given(/^I have (.*) and (.*) and (.*)$/, (integration, threed, customisation) => {
     browser.url(URL.magento_base + URL.payments_path);
     if (browser.isVisible(BACKEND.admin_username)) {
       browser.setValue(BACKEND.admin_username, VAL.admin.username);
@@ -138,25 +140,25 @@ export default function () {
     if (!browser.isVisible(BACKEND.plugin.keys_category.public)) {
       browser.click(BACKEND.plugin.keys_category.selector);
     }
-
-    if(integration == 'frames') {
-      chai.expect(browser.getValue(BACKEND.plugin.basic_category.integration)).to.equal('embedded');
-    } else {
-      chai.expect(browser.getValue(BACKEND.plugin.basic_category.integration)).to.equal('hosted');
+    if (integration === 'frames' && browser.getValue(BACKEND.plugin.basic_category.integration) !== 'embedded') {
+      browser.selectByValue(BACKEND.plugin.basic_category.integration, 'embedded');
+    } else if (integration === 'hosted' && browser.getValue(BACKEND.plugin.basic_category.integration) !== 'hosted') {
+      browser.selectByValue(BACKEND.plugin.basic_category.integration, 'hosted');
     }
-
-    if(threed == 'threed') {
-      chai.expect(browser.getValue(BACKEND.plugin.advanced_category.three_d)).to.equal('1');
-    } else {
-      chai.expect(browser.getValue(BACKEND.plugin.advanced_category.three_d)).to.equal('0');
+    if (threed === 'THREE D' && browser.getValue(BACKEND.plugin.advanced_category.three_d) === '0') {
+      browser.selectByValue(BACKEND.plugin.advanced_category.three_d, '1');
+    } else if (threed === 'no THREE D' && browser.getValue(BACKEND.plugin.advanced_category.three_d) === '1') {
+      browser.selectByValue(BACKEND.plugin.advanced_category.three_d, '0');
     }
-
-    if(customisation == 'customised') {
-      chai.expect(browser.getValue(BACKEND.plugin.basic_category.integration)).to.equal('hosted');
-      chai.expect(browser.getValue(BACKEND.plugin.basic_category.hosted_button_label)).to.equal(VAL.button_label);
+    if (customisation === 'customisation' && browser.getValue(BACKEND.plugin.basic_category.integration) !== 'hosted') {
+      browser.selectByValue(BACKEND.plugin.basic_category.integration, 'hosted');
+      browser.setValue(BACKEND.plugin.basic_category.hosted_theme_color, VAL.theme_color);
+      browser.setValue(BACKEND.plugin.basic_category.hosted_button_label, VAL.button_label);
     }
-
-
+    browser.click(BACKEND.plugin.save);
+    browser.waitUntil(function () {
+      return browser.isVisible(BACKEND.save_success_message);
+    }, VAL.timeout_out, 'the changes should be saved');
   });
   this.Given(/^I create an account$/, () => {
     browser.url(URL.magento_base + URL.sign_up_path);
@@ -184,5 +186,6 @@ export default function () {
   });
   this.Then(/^I logout from the registered customer account$/, () => {
     browser.url(URL.magento_base + URL.sign_out_path);
+    browser.pause(1000); // avoid magetno error
   });
 }
