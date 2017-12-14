@@ -75,7 +75,7 @@ export default function () {
     browser.setValue(BACKEND.plugin.advanced_category.vaut_title, VAL.vaut_title);
   });
 
-  this.Given(/^I (.*) 3D Secure$/, (option) => {
+  this.Given(/^I (.*) THREE D$/, (option) => {
     switch (option) {
       case 'enable':
         browser.selectByValue(BACKEND.plugin.advanced_category.three_d, '1');

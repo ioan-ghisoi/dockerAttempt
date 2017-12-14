@@ -3,7 +3,7 @@ Feature: Registered Customer Test Suite
 
 Scenario: I should be able to complete a 3D transaction using Frames integration
       Given I go to the backend of Checkout's plugin
-      Given I enable 3D Secure
+      Given I enable THREE D
       Given I set the integration type to frames
       Given I save the backend settings
       Given I login the registered customer account
@@ -17,7 +17,7 @@ Scenario: I should be able to complete a 3D transaction using Frames integration
 
 Scenario: I should be able to complete a non-3D transaction using Frames integration
       Given I go to the backend of Checkout's plugin
-      Given I disable 3D Secure
+      Given I disable THREE D
       Given I set the integration type to frames
       Given I save the backend settings
       Given I login the registered customer account
@@ -30,7 +30,7 @@ Scenario: I should be able to complete a non-3D transaction using Frames integra
 
 Scenario: I should be able to complete a 3D transaction using Hosted integration
       Given I go to the backend of Checkout's plugin
-      Given I enable 3D Secure
+      Given I enable THREE D
       Given I set the integration type to hosted
       Given I save the backend settings
       Given I login the registered customer account
@@ -44,7 +44,7 @@ Scenario: I should be able to complete a 3D transaction using Hosted integration
 
 Scenario: I should be able to complete a non-3D transaction using Hosted integration
       Given I go to the backend of Checkout's plugin
-      Given I disable 3D Secure
+      Given I disable THREE D
       Given I set the integration type to hosted
       Given I save the backend settings
       Given I login the registered customer account
@@ -79,7 +79,7 @@ Scenario: I should be able to set the Checkout plugin paymet option title as the
 Scenario: In Checkout Hosted I should be able see alternaive payments for the mixed payment mode
       Given I go to the backend of Checkout's plugin
       Given I set the integration type to hosted
-      Given I disable 3D Secure
+      Given I disable THREE D
       Given I set the payment mode to mixed
       Given I save the backend settings
       Given I login the registered customer account
@@ -92,7 +92,7 @@ Scenario: In Checkout Hosted I should be able see alternaive payments for the mi
 Scenario: In Checkout Hosted I should be able see only alternaive payments for the coresponding payment mode
       Given I go to the backend of Checkout's plugin
       Given I set the integration type to hosted
-      Given I disable 3D Secure
+      Given I disable THREE D
       Given I set the payment mode to cards
       Given I save the backend settings
       Given I login the registered customer account
