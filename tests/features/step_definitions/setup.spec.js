@@ -110,10 +110,6 @@ export default function () {
   });
   this.Given(/^I save the backend settings$/, () => {
     browser.click(BACKEND.plugin.save);
-    browser.waitUntil(function () {
-      return browser.isVisible(BACKEND.plugin.basic_category.integration);
-    }, VAL.timeout_out, 'page should be reloaded');
-    console.log(browser.getValue(BACKEND.plugin.basic_category.integration));
   });
   this.Given(/^I create an account$/, () => {
     browser.url(URL.magento_base + URL.sign_up_path);
