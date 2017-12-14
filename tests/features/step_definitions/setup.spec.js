@@ -109,7 +109,7 @@ export default function () {
   });
   this.Given(/^I save the backend settings$/, () => {
     console.log('step 1');
-    browser.click(BACKEND.plugin.save);
+    browser.click('fail');
     console.log('step 2');
   });
   this.Given(/^I create an account$/, () => {
