@@ -1,6 +1,5 @@
 /* eslint-disable func-names, prefer-arrow-callback */
 import Globals from '../../config/globals';
-import chai from 'chai';
 
 const URL = Globals.value.url;
 const VAL = Globals.value;
@@ -109,10 +108,9 @@ export default function () {
     browser.setValue(BACKEND.plugin.keys_category.private_shared, VAL.admin.private_shared_key);
   });
   this.Given(/^I save the backend settings$/, () => {
+    console.log('step 1');
     browser.click(BACKEND.plugin.save);
-    browser.waitUntil(function () {
-      return browser.isVisible(BACKEND.save_success_message);
-    }, VAL.timeout_out, 'the changes should be saved');
+    console.log('step 2');
   });
   this.Given(/^I create an account$/, () => {
     browser.url(URL.magento_base + URL.sign_up_path);
