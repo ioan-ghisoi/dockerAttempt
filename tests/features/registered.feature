@@ -67,7 +67,6 @@ Scenario: I should be able to customise Hosted integration
       Given I set the button label
       Given I save the backend settings
       Given I have hosted and no THREE D and customisation
-      Given I make sure the settings are noframes nothreed customised
       Given I login the registered customer account
       Then I complete the order flow as a registered customer until the payment stage
       Then I choose Checkout as a payment option
@@ -93,7 +92,6 @@ Scenario: In Checkout Hosted I should be able see alternaive payments for the mi
       Given I set the payment mode to mixed
       Given I save the backend settings
       Given I have hosted and no THREE D and no customisation
-      Given I make sure the settings are noframes nothreed no
       Given I login the registered customer account
       Then I complete the order flow as a registered customer until the payment stage
       Then I choose Checkout as a payment option
@@ -108,7 +106,6 @@ Scenario: In Checkout Hosted I should be able see only alternaive payments for t
       Given I set the payment mode to cards
       Given I save the backend settings
       Given I have hosted and no THREE D and no customisation
-      Given I make sure the settings are noframes nothreed no
       Given I login the registered customer account
       Then I complete the order flow as a registered customer until the payment stage
       Then I choose Checkout as a payment option
