@@ -108,31 +108,8 @@ export default function () {
     browser.setValue(BACKEND.plugin.keys_category.private_shared, VAL.admin.private_shared_key);
   });
   this.Given(/^I save the backend settings$/, () => {
-    console.log('step 1');
-    console.log(browser.getValue(BACKEND.plugin.save));
-    console.log(browser.isVisible(BACKEND.plugin.save));
     browser.click(BACKEND.plugin.save);
-    browser.pause(5000);
-    if (!browser.isVisible(BACKEND.plugin.selector)) {
-      browser.click(BACKEND.other_payments);
-    }
-    if (!browser.isVisible(BACKEND.plugin.basic_category.selector)) {
-      browser.click(BACKEND.plugin.selector);
-    }
-    if (!browser.isVisible(BACKEND.plugin.basic_category.title)) {
-      browser.click(BACKEND.plugin.basic_category.selector);
-    }
-    if (!browser.isVisible(BACKEND.plugin.advanced_category.cvv_vetification)) {
-      browser.click(BACKEND.plugin.advanced_category.selector);
-    }
-    if (!browser.isVisible(BACKEND.plugin.order_category.order_creation)) {
-      browser.click(BACKEND.plugin.order_category.selector);
-    }
-    if (!browser.isVisible(BACKEND.plugin.keys_category.public)) {
-      browser.click(BACKEND.plugin.keys_category.selector);
-    }
-    browser.click('fail');
-    console.log('step 2');
+    browser.pause(5000); //add pause and run
   });
   this.Given(/^I create an account$/, () => {
     browser.url(URL.magento_base + URL.sign_up_path);
