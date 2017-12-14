@@ -1,5 +1,6 @@
 /* eslint-disable func-names, prefer-arrow-callback */
 import Globals from '../../config/globals';
+import chai from 'chai';
 
 const URL = Globals.value.url;
 const VAL = Globals.value;
@@ -109,6 +110,7 @@ export default function () {
   });
   this.Given(/^I save the backend settings$/, () => {
     browser.click(BACKEND.plugin.save);
+    console.log(browser.getValue(BACKEND.plugin.basic_category.integration));
   });
   this.Given(/^I create an account$/, () => {
     browser.url(URL.magento_base + URL.sign_up_path);

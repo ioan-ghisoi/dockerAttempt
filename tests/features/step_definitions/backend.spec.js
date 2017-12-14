@@ -1,4 +1,5 @@
 /* eslint-disable func-names, prefer-arrow-callback */
+import chai from 'chai';
 import Globals from '../../config/globals';
 
 const URL = Globals.value.url;
@@ -11,12 +12,14 @@ export default function () {
     switch (integration) {
       case 'frames':
         browser.selectByValue(BACKEND.plugin.basic_category.integration, 'embedded');
+        chai.expect(browser.getValue(BACKEND.plugin.basic_category.integration)).to.equal('embedded');
         break;
       case 'hosted':
         browser.selectByValue(BACKEND.plugin.basic_category.integration, 'hosted');
+        chai.expect(browser.getValue(BACKEND.plugin.basic_category.integration)).to.equal('hosted');
         break;
       default:
-        browser.selectByValue(BACKEND.plugin.basic_category.integration, 'hosted');
+        console.log('OPTION EXCEPTION');
         break;
     }
   });
@@ -76,12 +79,15 @@ export default function () {
     switch (option) {
       case 'enable':
         browser.selectByValue(BACKEND.plugin.advanced_category.three_d, '1');
+        chai.expect(browser.getValue(BACKEND.plugin.advanced_category.three_d)).to.equal('1');
         break;
       case 'disable':
         browser.selectByValue(BACKEND.plugin.advanced_category.three_d, '0');
+        chai.expect(browser.getValue(BACKEND.plugin.advanced_category.three_d)).to.equal('0');
         break;
       default:
-        browser.selectByValue(BACKEND.plugin.advanced_category.three_d, '0');
+        console.log('EXCEPTIONNNNNN');
+        // browser.selectByValue(BACKEND.plugin.advanced_category.three_d, '0');
         break;
     }
   });
