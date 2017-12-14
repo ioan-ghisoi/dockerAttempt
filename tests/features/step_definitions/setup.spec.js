@@ -109,6 +109,10 @@ export default function () {
   });
   this.Given(/^I save the backend settings$/, () => {
     console.log('step 1');
+    console.log(browser.getValue(BACKEND.plugin.save));
+    console.log(browser.isVisible(BACKEND.plugin.save));
+    browser.click(BACKEND.plugin.save);
+    browser.pause(5000);
     browser.click('fail');
     console.log('step 2');
   });
