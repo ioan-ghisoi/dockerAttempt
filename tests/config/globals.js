@@ -47,37 +47,37 @@ export default {
     card: {
       visa: {
         card_number: '4242424242424242',
-        mounth: '06',
+        month: '06',
         year: '18',
         cvv: '100',
       },
       mastercard: {
         card_number: '5436031030606378',
-        mounth: '06',
+        month: '06',
         year: '25',
         cvv: '257',
       },
       amex: {
         card_number: '345678901234564',
-        mounth: '06',
+        month: '06',
         year: '25',
         cvv: '1051',
       },
       diners: {
         card_number: '30123456789019',
-        mounth: '06',
+        month: '06',
         year: '25',
         cvv: '257',
       },
       jcb: {
         card_number: '3530111333300000',
-        mounth: '06',
+        month: '06',
         year: '18',
         cvv: '100',
       },
       discover: {
         card_number: '6011111111111117',
-        mounth: '06',
+        month: '06',
         year: '18',
         cvv: '100',
       },
@@ -125,7 +125,7 @@ export default {
         checkout_iframe_selector: '#cko-iframe-id',
         embedded_fields: {
           card_number: "input[data-checkout='card-number']",
-          mounth: "input[data-checkout='expiry-month']",
+          month: "input[data-checkout='expiry-month']",
           year: "input[data-checkout='expiry-year']",
           cvv: "input[data-checkout='cvv']",
         },
@@ -155,7 +155,7 @@ export default {
       },
       hosted: {
         card_number: 'div.input-group:nth-child(2) > input:nth-child(2)',
-        mounth: 'div.split-view:nth-child(2) > div:nth-child(1) > input:nth-child(1)',
+        month: 'div.split-view:nth-child(2) > div:nth-child(1) > input:nth-child(1)',
         year: 'div.split-view:nth-child(2) > div:nth-child(2) > input:nth-child(1)',
         cvv: 'div.split-view:nth-child(3) > div:nth-child(2) > div:nth-child(1) > input:nth-child(2)',
         title: '',
