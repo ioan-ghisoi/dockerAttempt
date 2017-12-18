@@ -188,4 +188,38 @@ export default function () {
     browser.url(URL.magento_base + URL.sign_out_path);
     browser.pause(1000); // avoid magetno error
   });
+  this.Given(/^I check the sandbox keys$/, () => {
+    browser.url(URL.magento_base + URL.payments_path);
+    if (browser.isVisible(BACKEND.admin_username)) {
+      browser.setValue(BACKEND.admin_username, VAL.admin.username);
+      browser.setValue(BACKEND.admin_password, VAL.admin.password);
+      browser.click(BACKEND.admin_sign_in);
+      browser.url(URL.magento_base + URL.payments_path); // avoid magento cache popup
+    }
+    if (!browser.isVisible(BACKEND.plugin.selector)) {
+      browser.click(BACKEND.other_payments);
+    }
+    if (!browser.isVisible(BACKEND.plugin.basic_category.selector)) {
+      browser.click(BACKEND.plugin.selector);
+    }
+    if (!browser.isVisible(BACKEND.plugin.basic_category.title)) {
+      browser.click(BACKEND.plugin.basic_category.selector);
+    }
+    if (!browser.isVisible(BACKEND.plugin.advanced_category.cvv_vetification)) {
+      browser.click(BACKEND.plugin.advanced_category.selector);
+    }
+    if (!browser.isVisible(BACKEND.plugin.order_category.order_creation)) {
+      browser.click(BACKEND.plugin.order_category.selector);
+    }
+    if (!browser.isVisible(BACKEND.plugin.keys_category.public)) {
+      browser.click(BACKEND.plugin.keys_category.selector);
+    }
+    browser.setValue(BACKEND.plugin.keys_category.public, VAL.admin.public_key);
+    browser.setValue(BACKEND.plugin.keys_category.secret, VAL.admin.secret_key);
+    browser.setValue(BACKEND.plugin.keys_category.private_shared, VAL.admin.private_shared_key);
+    browser.click(BACKEND.plugin.save);
+    browser.waitUntil(function () {
+      return browser.isVisible(BACKEND.save_success_message);
+    }, VAL.timeout_out, 'the changes should be saved');
+  });
 }
