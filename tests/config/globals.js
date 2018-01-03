@@ -2,7 +2,7 @@
 export default {
   value: {
     url: {
-      magento_base: 'http://127.0.0.1/magento2',
+      magento_base: 'http://127.0.0.1/magento22',
       admin_path: '/admin',
       catalog_path: '/admin/div._required:nth-child(1) > div:nth-child(2) > input:nth-child(1)/product/',
       payments_path: '/admin/admin/system_config/edit/section/payment/',
