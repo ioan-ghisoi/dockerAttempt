@@ -51,10 +51,8 @@ export default function () {
       return browser.isVisible(BACKEND.admin);
     }, VAL.timeout_out, 'admin button should be visible');
     browser.click(BACKEND.admin);
-    browser.waitUntil(function () {
-      return browser.isVisible(BACKEND.admin_security);
-    }, VAL.timeout_out, 'admin security button should be visible');
-    browser.click(BACKEND.admin_security);
+    let security = browser.element('a*=Security');
+    security.click();
     browser.waitUntil(function () {
       return browser.isVisible(BACKEND.admin_security_key);
     }, VAL.timeout_out, 'admin security key option button should be visible');
