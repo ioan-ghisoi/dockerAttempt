@@ -95,7 +95,7 @@ export default function () {
       browser.url(URL.magento_base + URL.payments_path); // avoid magento cache popup
     }
     browser.waitUntil(function () {
-      return browser.isVisibleWithinViewport(BACKEND.plugin.other_payments);
+      return browser.isVisibleWithinViewport(BACKEND.other_payments);
     }, VAL.timeout_out, 'wait for plugin to be loaded');
     if (!browser.isVisible(BACKEND.plugin.selector)) {
       browser.click(BACKEND.other_payments);
@@ -106,31 +106,16 @@ export default function () {
     if (!browser.isVisible(BACKEND.plugin.basic_category.selector)) {
       browser.click(BACKEND.plugin.selector);
     }
-    browser.waitUntil(function () {
-      return browser.isVisibleWithinViewport(BACKEND.plugin.basic_category.selector);
-    }, VAL.timeout_out, 'wait for plugin to be loaded');
     if (!browser.isVisible(BACKEND.plugin.basic_category.title)) {
-      browser.waitUntil(function () {
-        return browser.isVisibleWithinViewport(BACKEND.plugin.basic_category.selector);
-      }, VAL.timeout_out, 'wait for plugin to be loaded');
       browser.click(BACKEND.plugin.basic_category.selector);
     }
     if (!browser.isVisible(BACKEND.plugin.advanced_category.cvv_vetification)) {
-      browser.waitUntil(function () {
-        return browser.isVisibleWithinViewport(BACKEND.plugin.advanced_category.selector);
-      }, VAL.timeout_out, 'wait for plugin to be loaded');
       browser.click(BACKEND.plugin.advanced_category.selector);
     }
     if (!browser.isVisible(BACKEND.plugin.order_category.order_creation)) {
-      browser.waitUntil(function () {
-        return browser.isVisibleWithinViewport(BACKEND.plugin.order_category.selector);
-      }, VAL.timeout_out, 'wait for plugin to be loaded');
       browser.click(BACKEND.plugin.order_category.selector);
     }
     if (!browser.isVisible(BACKEND.plugin.keys_category.public)) {
-      browser.waitUntil(function () {
-        return browser.isVisibleWithinViewport(BACKEND.plugin.keys_category.selector);
-      }, VAL.timeout_out, 'wait for plugin to be loaded');
       browser.click(BACKEND.plugin.keys_category.selector);
     }
   });
