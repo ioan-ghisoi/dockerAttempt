@@ -3,7 +3,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: johnnyshrewd/mag22
+      - image: johnnyshrewd/magento:22
     working_directory: ~/cko_magento2
     steps:
       - checkout

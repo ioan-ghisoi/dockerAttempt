@@ -13,12 +13,19 @@ export default function () {
         browser.waitUntil(function () {
           return !browser.getAttribute('body', 'class').includes(FRONTEND.order.ajax_loader);
         }, VAL.timeout_out, 'the product should be loaded');
-        browser.click(FRONTEND.order.add_product);
+        let addButton = browser.element('button*=Add to Cart');
+        addButton.click();
         // Add product twice to make sure Magento updates the basket
         browser.waitUntil(function () {
           return !browser.getAttribute('body', 'class').includes(FRONTEND.order.ajax_loader);
         }, VAL.timeout_out, 'the product should be loaded');
-        browser.click(FRONTEND.order.add_product);
+        browser.waitUntil(function () {
+          return addButton.getText() === 'Add to Cart';
+        }, VAL.timeout_out, 'the product should be loaded');
+        addButton.click();
+        browser.waitUntil(function () {
+          return !browser.getAttribute('body', 'class').includes(FRONTEND.order.ajax_loader);
+        }, VAL.timeout_out, 'the product should be loaded');
         browser.waitUntil(function () {
           return browser.isVisible(FRONTEND.order.product_counter);
         }, VAL.timeout_out, 'the basket products counter to be visible');
@@ -45,9 +52,7 @@ export default function () {
           browser.setValue(FRONTEND.order.customer_phone, VAL.guest.phone);
           browser.setValue(FRONTEND.order.customer_email, VAL.guest.email);
         }
-        browser.waitUntil(function () {
-          return browser.isVisible(FRONTEND.order.shipping_method);
-        }, VAL.timeout_out, 'the shipping methods should be ticked');
+        browser.pause(4000); // avoid errors with magento
         browser.click(FRONTEND.order.go_to_payment);
         browser.waitUntil(function () {
           return !browser.isVisible(FRONTEND.order.loader);
@@ -61,14 +66,21 @@ export default function () {
         browser.waitUntil(function () {
           return !browser.isVisible(FRONTEND.order.loader);
         }, VAL.timeout_out, 'the product page to be loaded');
-        browser.click(FRONTEND.order.add_product);
+        let addButtonRegistered = browser.element('button*=Add to Cart');
+        addButtonRegistered.click();
         browser.waitUntil(function () {
           return !browser.getAttribute('body', 'class').includes(FRONTEND.order.ajax_loader);
         }, VAL.timeout_out, 'the product should be loaded');
         browser.waitUntil(function () {
           return !browser.isVisible(FRONTEND.order.loader);
         }, VAL.timeout_out, 'the product page to be loaded');
-        browser.click(FRONTEND.order.add_product);
+        browser.waitUntil(function () {
+          return addButtonRegistered.getText() === 'Add to Cart';
+        }, VAL.timeout_out, 'the product should be loaded');
+        addButtonRegistered.click();
+        browser.waitUntil(function () {
+          return !browser.getAttribute('body', 'class').includes(FRONTEND.order.ajax_loader);
+        }, VAL.timeout_out, 'the product should be loaded');
         browser.waitUntil(function () {
           return browser.isVisible(FRONTEND.order.product_counter);
         }, VAL.timeout_out, 'the basket products counter to be visible');

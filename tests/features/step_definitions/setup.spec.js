@@ -15,6 +15,18 @@ export default function () {
       height: VAL.resolution_h,
     }, true);
   });
+
+  this.Given(/^I disable captcha$/, () => {
+    browser.url(URL.magento_base + URL.captcha_path);
+    if (!browser.isVisible(BACKEND.captcha_option)) {
+      browser.click(BACKEND.captcha_category);
+    }
+    if(browser.isSelected(BACKEND.captcha_default)) {
+      browser.click(BACKEND.captcha_default);
+    }
+    browser.selectByValue(BACKEND.captcha_option, 0);
+    browser.click(BACKEND.plugin.save);
+  });
   this.Given(/^I disable the url secret key encryption$/, () => {
     browser.url(URL.magento_base + URL.admin_path);
     if (browser.isVisible(BACKEND.admin_username)) {
@@ -174,7 +186,8 @@ export default function () {
     browser.waitUntil(function () {
       return browser.isVisible(FRONTEND.registration.success);
     }, VAL.timeout_out, 'loadershould not be visible');
-    browser.click(FRONTEND.registration.address_tab);
+    let Address = browser.element("=Address Book");
+    Address.click();
     browser.waitUntil(function () {
       return browser.isVisible(FRONTEND.registration.street);
     }, VAL.timeout_out, 'street input be visible');
