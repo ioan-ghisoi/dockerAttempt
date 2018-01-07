@@ -138,24 +138,30 @@ export default function () {
       browser.click(BACKEND.admin_sign_in);
       browser.url(URL.magento_base + URL.payments_path); // avoid magento cache popup
     }
+    browser.pause(5000);
     if (!browser.isVisible(BACKEND.plugin.selector)) {
       browser.click(BACKEND.other_payments);
     }
     if (!browser.isVisible(BACKEND.plugin.basic_category.selector)) {
       browser.click(BACKEND.plugin.selector);
     }
+    browser.pause(5000);
     if (!browser.isVisible(BACKEND.plugin.basic_category.title)) {
       browser.click(BACKEND.plugin.basic_category.selector);
     }
+    browser.pause(5000);
     if (!browser.isVisible(BACKEND.plugin.advanced_category.cvv_vetification)) {
       browser.click(BACKEND.plugin.advanced_category.selector);
     }
+    browser.pause(5000);
     if (!browser.isVisible(BACKEND.plugin.order_category.order_creation)) {
       browser.click(BACKEND.plugin.order_category.selector);
     }
+    browser.pause(5000);
     if (!browser.isVisible(BACKEND.plugin.keys_category.public)) {
       browser.click(BACKEND.plugin.keys_category.selector);
     }
+    browser.pause(5000);
     if (integration === 'frames' && browser.getValue(BACKEND.plugin.basic_category.integration) !== 'embedded') {
       browser.selectByValue(BACKEND.plugin.basic_category.integration, 'embedded');
     } else if (integration === 'hosted' && browser.getValue(BACKEND.plugin.basic_category.integration) !== 'hosted') {
