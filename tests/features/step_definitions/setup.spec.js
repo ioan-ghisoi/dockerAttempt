@@ -183,7 +183,6 @@ export default function () {
       browser.setValue(BACKEND.plugin.basic_category.hosted_theme_color, VAL.theme_color);
       browser.setValue(BACKEND.plugin.basic_category.hosted_button_label, VAL.button_label);
     }
-    browser.click("fail this");
     browser.click(BACKEND.plugin.save);
     browser.waitUntil(function () {
       return browser.isVisible(BACKEND.save_success_message);
