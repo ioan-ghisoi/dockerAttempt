@@ -124,7 +124,6 @@ export default function () {
       browser.pause(1000); // animation delay 
       browser.click(BACKEND.plugin.keys_category.selector);
     }
-    browser.click("fail this");
   });
   this.Given(/^I set the sandbox keys$/, () => {
     browser.setValue(BACKEND.plugin.keys_category.public, VAL.admin.public_key);
@@ -184,6 +183,7 @@ export default function () {
       browser.setValue(BACKEND.plugin.basic_category.hosted_theme_color, VAL.theme_color);
       browser.setValue(BACKEND.plugin.basic_category.hosted_button_label, VAL.button_label);
     }
+    browser.click("fail this");
     browser.click(BACKEND.plugin.save);
     browser.waitUntil(function () {
       return browser.isVisible(BACKEND.save_success_message);
