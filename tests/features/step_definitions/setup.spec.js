@@ -138,10 +138,11 @@ export default function () {
       browser.click(BACKEND.admin_sign_in);
       browser.url(URL.magento_base + URL.payments_path); // avoid magento cache popup
     }
-    browser.waitUntil(function () {
-      return browser.isVisibleWithinViewport(BACKEND.other_payments);
-    }, VAL.timeout_out, 'wait for plugin to be loaded');
+    browser.pause(5000);
     if (!browser.isVisible(BACKEND.plugin.selector)) {
+      browser.waitUntil(function () {
+        return browser.isVisibleWithinViewport(BACKEND.other_payments);
+      }, VAL.timeout_out, 'wait for plugin to be loaded');
       browser.click(BACKEND.other_payments);
     }
     browser.waitUntil(function () {
@@ -219,7 +220,11 @@ export default function () {
       browser.click(BACKEND.admin_sign_in);
       browser.url(URL.magento_base + URL.payments_path); // avoid magento cache popup
     }
+    browser.pause(5000);
     if (!browser.isVisible(BACKEND.plugin.selector)) {
+      browser.waitUntil(function () {
+        return browser.isVisibleWithinViewport(BACKEND.other_payments);
+      }, VAL.timeout_out, 'wait for plugin to be loaded');
       browser.click(BACKEND.other_payments);
     }
     if (!browser.isVisible(BACKEND.plugin.basic_category.selector)) {
