@@ -131,62 +131,62 @@ export default function () {
     }, VAL.timeout_out, 'the changes should be saved');
   });
   this.Given(/^I have (.*) and (.*) and (.*)$/, (integration, threed, customisation) => {
-    browser.url(URL.magento_base + URL.payments_path);
-    if (browser.isVisible(BACKEND.admin_username)) {
-      browser.setValue(BACKEND.admin_username, VAL.admin.username);
-      browser.setValue(BACKEND.admin_password, VAL.admin.password);
-      browser.click(BACKEND.admin_sign_in);
-      browser.url(URL.magento_base + URL.payments_path); // avoid magento cache popup
-    }
-    browser.pause(5000);
-    if (!browser.isVisible(BACKEND.plugin.selector)) {
-      browser.waitUntil(function () {
-        return browser.isVisibleWithinViewport(BACKEND.other_payments);
-      }, VAL.timeout_out, 'wait for plugin to be loaded');
-      browser.click(BACKEND.other_payments);
-    }
-    browser.waitUntil(function () {
-      return browser.isVisibleWithinViewport(BACKEND.plugin.selector);
-    }, VAL.timeout_out, 'wait for plugin to be loaded');
-    if (!browser.isVisible(BACKEND.plugin.basic_category.selector)) {
-      browser.pause(5000);
-      browser.click(BACKEND.plugin.selector);
-    }
-    if (!browser.isVisible(BACKEND.plugin.basic_category.title)) {
-      browser.pause(5000);
-      browser.click(BACKEND.plugin.basic_category.selector);
-    }
-    if (!browser.isVisible(BACKEND.plugin.advanced_category.cvv_vetification)) {
-      browser.pause(5000);
-      browser.click(BACKEND.plugin.advanced_category.selector);
-    }
-    if (!browser.isVisible(BACKEND.plugin.order_category.order_creation)) {
-      browser.pause(5000);
-      browser.click(BACKEND.plugin.order_category.selector);
-    }
-    if (!browser.isVisible(BACKEND.plugin.keys_category.public)) {
-      browser.pause(5000);
-      browser.click(BACKEND.plugin.keys_category.selector);
-    }
-    if (integration === 'frames' && browser.getValue(BACKEND.plugin.basic_category.integration) !== 'embedded') {
-      browser.selectByValue(BACKEND.plugin.basic_category.integration, 'embedded');
-    } else if (integration === 'hosted' && browser.getValue(BACKEND.plugin.basic_category.integration) !== 'hosted') {
-      browser.selectByValue(BACKEND.plugin.basic_category.integration, 'hosted');
-    }
-    if (threed === 'THREE D' && browser.getValue(BACKEND.plugin.advanced_category.three_d) === '0') {
-      browser.selectByValue(BACKEND.plugin.advanced_category.three_d, '1');
-    } else if (threed === 'no THREE D' && browser.getValue(BACKEND.plugin.advanced_category.three_d) === '1') {
-      browser.selectByValue(BACKEND.plugin.advanced_category.three_d, '0');
-    }
-    if (customisation === 'customisation' && browser.getValue(BACKEND.plugin.basic_category.integration) !== 'hosted') {
-      browser.selectByValue(BACKEND.plugin.basic_category.integration, 'hosted');
-      browser.setValue(BACKEND.plugin.basic_category.hosted_theme_color, VAL.theme_color);
-      browser.setValue(BACKEND.plugin.basic_category.hosted_button_label, VAL.button_label);
-    }
-    browser.click(BACKEND.plugin.save);
-    browser.waitUntil(function () {
-      return browser.isVisible(BACKEND.save_success_message);
-    }, VAL.timeout_out, 'the changes should be saved');
+    // browser.url(URL.magento_base + URL.payments_path);
+    // if (browser.isVisible(BACKEND.admin_username)) {
+    //   browser.setValue(BACKEND.admin_username, VAL.admin.username);
+    //   browser.setValue(BACKEND.admin_password, VAL.admin.password);
+    //   browser.click(BACKEND.admin_sign_in);
+    //   browser.url(URL.magento_base + URL.payments_path); // avoid magento cache popup
+    // }
+    // browser.pause(1000); // animation delay 
+    // if (!browser.isVisible(BACKEND.plugin.selector)) {
+    //   browser.waitUntil(function () {
+    //     return browser.isVisibleWithinViewport(BACKEND.other_payments);
+    //   }, VAL.timeout_out, 'wait for plugin to be loaded');
+    //   browser.click(BACKEND.other_payments);
+    // }
+    // browser.waitUntil(function () {
+    //   return browser.isVisibleWithinViewport(BACKEND.plugin.selector);
+    // }, VAL.timeout_out, 'wait for plugin to be loaded');
+    // if (!browser.isVisible(BACKEND.plugin.basic_category.selector)) {
+    //   browser.pause(1000); // animation delay 
+    //   browser.click(BACKEND.plugin.selector);
+    // }
+    // if (!browser.isVisible(BACKEND.plugin.basic_category.title)) {
+    //   browser.pause(1000); // animation delay 
+    //   browser.click(BACKEND.plugin.basic_category.selector);
+    // }
+    // if (!browser.isVisible(BACKEND.plugin.advanced_category.cvv_vetification)) {
+    //   browser.pause(1000); // animation delay 
+    //   browser.click(BACKEND.plugin.advanced_category.selector);
+    // }
+    // if (!browser.isVisible(BACKEND.plugin.order_category.order_creation)) {
+    //   browser.pause(1000); // animation delay 
+    //   browser.click(BACKEND.plugin.order_category.selector);
+    // }
+    // if (!browser.isVisible(BACKEND.plugin.keys_category.public)) {
+    //   browser.pause(1000); // animation delay 
+    //   browser.click(BACKEND.plugin.keys_category.selector);
+    // }
+    // if (integration === 'frames' && browser.getValue(BACKEND.plugin.basic_category.integration) !== 'embedded') {
+    //   browser.selectByValue(BACKEND.plugin.basic_category.integration, 'embedded');
+    // } else if (integration === 'hosted' && browser.getValue(BACKEND.plugin.basic_category.integration) !== 'hosted') {
+    //   browser.selectByValue(BACKEND.plugin.basic_category.integration, 'hosted');
+    // }
+    // if (threed === 'THREE D' && browser.getValue(BACKEND.plugin.advanced_category.three_d) === '0') {
+    //   browser.selectByValue(BACKEND.plugin.advanced_category.three_d, '1');
+    // } else if (threed === 'no THREE D' && browser.getValue(BACKEND.plugin.advanced_category.three_d) === '1') {
+    //   browser.selectByValue(BACKEND.plugin.advanced_category.three_d, '0');
+    // }
+    // if (customisation === 'customisation' && browser.getValue(BACKEND.plugin.basic_category.integration) !== 'hosted') {
+    //   browser.selectByValue(BACKEND.plugin.basic_category.integration, 'hosted');
+    //   browser.setValue(BACKEND.plugin.basic_category.hosted_theme_color, VAL.theme_color);
+    //   browser.setValue(BACKEND.plugin.basic_category.hosted_button_label, VAL.button_label);
+    // }
+    // browser.click(BACKEND.plugin.save);
+    // browser.waitUntil(function () {
+    //   return browser.isVisible(BACKEND.save_success_message);
+    // }, VAL.timeout_out, 'the changes should be saved');
   });
   this.Given(/^I create an account$/, () => {
     browser.url(URL.magento_base + URL.sign_up_path);
@@ -225,29 +225,29 @@ export default function () {
       browser.click(BACKEND.admin_sign_in);
       browser.url(URL.magento_base + URL.payments_path); // avoid magento cache popup
     }
-    browser.pause(5000);
+    browser.pause(1000);
     if (!browser.isVisible(BACKEND.plugin.selector)) {
-      browser.pause(5000);
+      browser.pause(1000);
       browser.click(BACKEND.other_payments);
     }
     if (!browser.isVisible(BACKEND.plugin.basic_category.selector)) {
-      browser.pause(5000);
+      browser.pause(1000);
       browser.click(BACKEND.plugin.selector);
     }
     if (!browser.isVisible(BACKEND.plugin.basic_category.title)) {
-      browser.pause(5000);
+      browser.pause(1000);
       browser.click(BACKEND.plugin.basic_category.selector);
     }
     if (!browser.isVisible(BACKEND.plugin.advanced_category.cvv_vetification)) {
-      browser.pause(5000);
+      browser.pause(1000);
       browser.click(BACKEND.plugin.advanced_category.selector);
     }
     if (!browser.isVisible(BACKEND.plugin.order_category.order_creation)) {
-      browser.pause(5000);
+      browser.pause(1000);
       browser.click(BACKEND.plugin.order_category.selector);
     }
     if (!browser.isVisible(BACKEND.plugin.keys_category.public)) {
-      browser.pause(5000);
+      browser.pause(1000);
       browser.click(BACKEND.plugin.keys_category.selector);
     }
     browser.setValue(BACKEND.plugin.keys_category.public, VAL.admin.public_key);
