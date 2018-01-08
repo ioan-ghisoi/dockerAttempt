@@ -13,16 +13,16 @@ export default function () {
         browser.waitUntil(function () {
           return !browser.getAttribute('body', 'class').includes(FRONTEND.order.ajax_loader);
         }, VAL.timeout_out, 'the product should be loaded');
-        browser.click('#product-addtocart-button');
+        browser.click(FRONTEND.order.add_product);
         // Add product twice to make sure Magento updates the basket
         browser.waitUntil(function () {
           return !browser.getAttribute('body', 'class').includes(FRONTEND.order.ajax_loader);
         }, VAL.timeout_out, 'the product should be loaded');
         browser.waitUntil(function () {
-          let addButton = browser.getText('#product-addtocart-button');
+          let addButton = browser.getText(FRONTEND.order.add_product);
           return addButton === 'Add to Cart';
         }, VAL.timeout_out, 'the product should be loaded');
-        browser.click('#product-addtocart-button');
+        browser.click(FRONTEND.order.add_product);
         browser.waitUntil(function () {
           return !browser.getAttribute('body', 'class').includes(FRONTEND.order.ajax_loader);
         }, VAL.timeout_out, 'the product should be loaded');
@@ -70,10 +70,10 @@ export default function () {
           return !browser.getAttribute('body', 'class').includes(FRONTEND.order.ajax_loader);
         }, VAL.timeout_out, 'the product should be loaded');
         browser.waitUntil(function () {
-          let addButton = browser.getText('#product-addtocart-button');
+          let addButton = browser.getText(FRONTEND.order.add_product);
           return addButton === 'Add to Cart';
         }, VAL.timeout_out, 'the product should be loaded');
-        browser.click('#product-addtocart-button');
+        browser.click(FRONTEND.order.add_product);
         browser.waitUntil(function () {
           return !browser.getAttribute('body', 'class').includes(FRONTEND.order.ajax_loader);
         }, VAL.timeout_out, 'the product should be loaded');
