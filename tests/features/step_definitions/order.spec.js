@@ -13,16 +13,16 @@ export default function () {
         browser.waitUntil(function () {
           return !browser.getAttribute('body', 'class').includes(FRONTEND.order.ajax_loader);
         }, VAL.timeout_out, 'the product should be loaded');
-        let addButton = browser.element('button*=Add to Cart');
-        addButton.click();
+        browser.click('#product-addtocart-button');
         // Add product twice to make sure Magento updates the basket
         browser.waitUntil(function () {
           return !browser.getAttribute('body', 'class').includes(FRONTEND.order.ajax_loader);
         }, VAL.timeout_out, 'the product should be loaded');
         browser.waitUntil(function () {
-          return addButton.getText() === 'Add to Cart';
+          let addButton = browser.getText('#product-addtocart-button');
+          return addButton === 'Add to Cart';
         }, VAL.timeout_out, 'the product should be loaded');
-        addButton.click();
+        browser.click('#product-addtocart-button');
         browser.waitUntil(function () {
           return !browser.getAttribute('body', 'class').includes(FRONTEND.order.ajax_loader);
         }, VAL.timeout_out, 'the product should be loaded');
@@ -66,18 +66,14 @@ export default function () {
         browser.waitUntil(function () {
           return !browser.isVisible(FRONTEND.order.loader);
         }, VAL.timeout_out, 'the product page to be loaded');
-        let addButtonRegistered = browser.element('button*=Add to Cart');
-        addButtonRegistered.click();
         browser.waitUntil(function () {
           return !browser.getAttribute('body', 'class').includes(FRONTEND.order.ajax_loader);
         }, VAL.timeout_out, 'the product should be loaded');
         browser.waitUntil(function () {
-          return !browser.isVisible(FRONTEND.order.loader);
-        }, VAL.timeout_out, 'the product page to be loaded');
-        browser.waitUntil(function () {
-          return addButtonRegistered.getText() === 'Add to Cart';
+          let addButton = browser.getText('#product-addtocart-button');
+          return addButton === 'Add to Cart';
         }, VAL.timeout_out, 'the product should be loaded');
-        addButtonRegistered.click();
+        browser.click('#product-addtocart-button');
         browser.waitUntil(function () {
           return !browser.getAttribute('body', 'class').includes(FRONTEND.order.ajax_loader);
         }, VAL.timeout_out, 'the product should be loaded');
