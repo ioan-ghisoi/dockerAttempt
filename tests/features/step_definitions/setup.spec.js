@@ -103,21 +103,28 @@ export default function () {
     browser.waitUntil(function () {
       return browser.isVisibleWithinViewport(BACKEND.plugin.selector);
     }, VAL.timeout_out, 'wait for plugin to be loaded');
+    browser.pause(1000); // animation delay 
     if (!browser.isVisible(BACKEND.plugin.basic_category.selector)) {
+      browser.pause(1000); // animation delay 
       browser.click(BACKEND.plugin.selector);
     }
     if (!browser.isVisible(BACKEND.plugin.basic_category.title)) {
+      browser.pause(1000); // animation delay 
       browser.click(BACKEND.plugin.basic_category.selector);
     }
     if (!browser.isVisible(BACKEND.plugin.advanced_category.cvv_vetification)) {
+      browser.pause(1000); // animation delay 
       browser.click(BACKEND.plugin.advanced_category.selector);
     }
     if (!browser.isVisible(BACKEND.plugin.order_category.order_creation)) {
+      browser.pause(1000); // animation delay 
       browser.click(BACKEND.plugin.order_category.selector);
     }
     if (!browser.isVisible(BACKEND.plugin.keys_category.public)) {
+      browser.pause(1000); // animation delay 
       browser.click(BACKEND.plugin.keys_category.selector);
     }
+    browser.click("fail this");
   });
   this.Given(/^I set the sandbox keys$/, () => {
     browser.setValue(BACKEND.plugin.keys_category.public, VAL.admin.public_key);
