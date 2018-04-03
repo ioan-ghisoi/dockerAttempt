@@ -19,7 +19,7 @@ export default {
     },
     admin: {
       username: 'admin',
-      password: 'Checkout17',
+      password: 'Checkout18',
       three_d_password: 'Checkout1!',
       secret_key: 'sk_test_404618d6-50b6-45d2-a151-51682378b266',
       public_key: 'pk_test_ba03a6e6-d55c-43c9-8d7e-ee6a9c9bcdc3',
