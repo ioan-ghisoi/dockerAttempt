@@ -14,18 +14,6 @@ Scenario: I should be able to complete a 3D transaction using Frames integration
       Then I complete the THREE D details
       Then I should see the success page
 
-Scenario: I should be able to complete a non-3D transaction using Frames integration
-      Given I go to the backend of Checkout's plugin
-      Given I disable THREE D
-      Given I set the integration type to frames
-      Given I save the backend settings
-      Given I have frames and no THREE D and no customisation
-      Then I complete the order flow as a unregistered customer until the payment stage
-      Then I choose Checkout as a payment option
-      Then I complete Checkout Frames with a mastercard card
-      Then I submit the order for the frames integration
-      Then I should see the success page
-
 Scenario: I should be able to complete a 3D transaction using Hosted integration
       Given I go to the backend of Checkout's plugin
       Given I enable THREE D
